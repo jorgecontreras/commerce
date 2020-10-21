@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>An error ocurred</h2>
+    <ul>
+    {% for error in errors %}
+    <div class="alert alert-danger" role="alert">
+            {{ error }}
+    </div>
+    {% endfor %}
+    </ul>
+    
+    {% if listing %}
+        <a href="{%url 'listing' listing.id %}">Return to listing</a>
+    {% endif %}
+{% endblock %}

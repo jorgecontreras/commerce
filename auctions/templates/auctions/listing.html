@@ -1,0 +1,75 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">{{ listing.title }}</h1>
+          
+    {% if listing.active == False %}
+        <p><span class="badge badge-danger">This listing has been closed.</span></p>
+    {% endif %}
+    {% if is_winner %}
+    <div class="alert alert-success" role="alert">Congratulations, you have won this bid!</div>
+    {% endif %}
+    {% if watchlist %}
+    <button type="button" class="btn btn-outline-info">
+        <a href="{% url 'watchlist_remove' listing.id %}">Remove from Watchlist</a>
+    </button>
+    {% else %}
+    <button type="button" class="btn btn-outline-info">
+        <a href="{% url 'watchlist_add' listing.id %}">Add to Watchlist</a>
+    </button>
+    {% endif %}
+    {% if can_close %}
+        | <a href="{% url 'close_listing' listing.id %}">Close Listing</a>
+    {% endif %}
+    <p class="lead"> 
+        <p>
+        {% if listing.image_url %}
+            <img src="{{ listing.image_url }}" height="350px">
+        {% endif %}
+        </p>
+        {{ listing.description }}</p>
+        </div>
+      </div>
+
+    <p>&nbsp;</p>
+    <h4>Bid</h4>
+    <span class="badge badge-secondary">{{ bid }}</span>
+
+    {% if listing.active %}
+        {% if user.is_authenticated %}
+            <form action="{% url 'place_bid' %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="listing_id" value="{{ listing.id }}">
+                {{ bid_form }}
+                <input type="submit">
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Log In</a> to place a bid!
+        {% endif %}
+    {% endif %}
+    <p>&nbsp;</p>
+    <h4>Comments</h4>
+
+    {% if user.is_authenticated %}
+        <form  action="{% url 'comment' %}" method="post" >
+            {% csrf_token %}
+            <input type="hidden" name="listing_id" value="{{ listing.id }}">
+            {{ comment_form }}
+            <input type="submit">
+        </form>
+    {% endif %}
+    <div class="list-group">
+        {% for comment in comments %}
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <small class="text-muted"><b>{{ comment.user }}:</b></small>
+                </div>
+                <p class="mb-1">{{ comment }}</p>
+            </a>
+        {% endfor %}
+    </div>
+    <p>&nbsp;</p>
+    <a href="{% url 'index' %}">Back to Listings Page</a>
+{% endblock %}
