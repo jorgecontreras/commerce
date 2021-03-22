@@ -156,6 +156,10 @@ def create_listing(request):
 
             return HttpResponseRedirect('/listing/' + str(l.id))
         else:
+            print("form invalid")
+
+            print(form.errors)
+
             return render(request, "auctions/create.html", {
                 "form": form
             })
