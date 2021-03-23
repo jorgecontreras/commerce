@@ -59,7 +59,11 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="image_url">Category</label><br>
-                                    {{ form.category }}
+                                    <select class="form-control">
+                                        {% for cat in form.category %}
+                                        <option>{{ cat }}</option>
+                                        {% endfor %}
+                                      </select>
                                     
                                 </div>
                             </div>
@@ -67,7 +71,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label">Item Description</label>
-                                    <textarea rows="4" name="description" class="form-control form-control-alternative" placeholder="Describe item in detail...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                                    <textarea rows="4" name="description" class="form-control form-control-alternative" placeholder="Describe item in detail..."></textarea>
                                 </div>
                             </div>
                         </div>

@@ -280,6 +280,8 @@ def place_bid(request):
                     "listing": listing,
                     "errors": errors
                 })
+        else:
+            print(form.errors)
 
     return HttpResponseRedirect('/listing/' + str(listing_id))
 
