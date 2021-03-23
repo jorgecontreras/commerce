@@ -59,9 +59,9 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="form-control-label" for="image_url">Category</label><br>
-                                    <select class="form-control">
+                                    <select class="form-control" name="category" id="category">
                                         {% for cat in form.category %}
-                                        <option>{{ cat }}</option>
+                                        <option value="{{ catd.id }}">{{ cat }}</option>
                                         {% endfor %}
                                       </select>
                                     
