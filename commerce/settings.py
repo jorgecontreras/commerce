@@ -124,4 +124,5 @@ GS_BUCKET_NAME = "gifted-commerce"
 DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
 STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
 GS_DEFAULT_ACL = "publicRead"
+STATIC_URL = '/static/'
 # [END cloudrun_django_staticconfig]
