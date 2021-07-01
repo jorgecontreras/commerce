@@ -118,8 +118,10 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = 'http://storage.googleapis.com/gifted-commerce/static/'
-
-STATIC_ROOT = 'static/'
+# [START cloudrun_django_staticconfig]
+# Define static storage via django-storages[google]
+GS_BUCKET_NAME = "gifted-commerce"
+DEFAULT_FILE_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+STATICFILES_STORAGE = "storages.backends.gcloud.GoogleCloudStorage"
+GS_DEFAULT_ACL = "publicRead"
+# [END cloudrun_django_staticconfig]
